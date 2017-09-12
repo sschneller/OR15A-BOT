@@ -7,6 +7,7 @@ import net.dv8tion.jda.core.entities.*;
 import net.dv8tion.jda.core.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.core.events.guild.voice.GuildVoiceJoinEvent;
 import net.dv8tion.jda.core.events.guild.voice.GuildVoiceLeaveEvent;
+import net.dv8tion.jda.core.events.guild.voice.GuildVoiceMoveEvent;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.exceptions.RateLimitedException;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
@@ -87,6 +88,18 @@ public class OrisaListener extends ListenerAdapter {
         System.out.println(event.getChannelLeft().getMembers());
         if(watchedTempChannels.contains(event.getChannelLeft()) && event.getChannelLeft().getMembers().isEmpty()) {
             System.out.println("HIT");
+            watchedTempChannels.remove(event.getChannelLeft());
+            event.getChannelLeft().delete().queue();
+        }
+    }
+
+    @Override
+    public void onGuildVoiceMove(GuildVoiceMoveEvent event) {
+        if(unwatchedTempChannels.contains(event.getChannelJoined())) {
+            unwatchedTempChannels.remove(event.getChannelJoined());
+            watchedTempChannels.add(event.getChannelJoined());
+        }
+        else if(watchedTempChannels.contains(event.getChannelLeft()) && event.getChannelLeft().getMembers().isEmpty()) {
             watchedTempChannels.remove(event.getChannelLeft());
             event.getChannelLeft().delete().queue();
         }
