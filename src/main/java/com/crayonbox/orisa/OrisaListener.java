@@ -19,9 +19,9 @@ import java.util.Random;
 
 public class OrisaListener extends ListenerAdapter {
     private static final String GREETING_PM = "**Welcome to the server!**\nThis is an automated message from the local bot.  I'm going to ask you a few questions, please respond with just the number of the associated answer.";
+    private static final ArrayList<String> possibleResponses = new ArrayList<>(Arrays.asList(new String[]{new String("What are you gonna do, kill me?"), new String("Attack the fire giant!"), new String("Give Khepri a gun!"), new String("Sobek is my alligator?")}));
     private ArrayList<Channel> unwatchedTempChannels = new ArrayList<>();
     private ArrayList<Channel> watchedTempChannels = new ArrayList<>();
-    private static final ArrayList<String> possibleResponses = new ArrayList<>(Arrays.asList(new String[]{new String("What are you gonna do, kill me?"), new String("Attack the fire giant!"), new String("Give Khepri a gun!"), new String("Sobek is my alligator?")}));
 
     public static void main(String[] args) throws LoginException, RateLimitedException, InterruptedException {
         JDA jda = new JDABuilder(AccountType.BOT).setToken(args[0]).buildBlocking();
