@@ -7,7 +7,7 @@ plugins {
 mainClassName = 'com.crayonbox.orisa.OrisaListener'
 
 version '1.0'
-def jdaVersion = '3.3.0_265'
+def jdaVersion = '3.3.0_273'
 
 sourceCompatibility = 1.8
 
