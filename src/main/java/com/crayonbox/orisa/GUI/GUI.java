@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GUI extends JFrame {
+    private final OrisaListener bot;
     private ArrayList<ComboPanel> consoles = new ArrayList<>();
     private List<Guild> guildList;
-    private final OrisaListener bot;
 
     public GUI(OrisaListener bot) {
         super();
@@ -24,7 +24,7 @@ public class GUI extends JFrame {
         guildList = guilds;
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("OR15A");
-        ImageIcon ii =  new ImageIcon("C:\\Users\\MadCrayolaz\\Pictures\\icon-portrait.png");
+        ImageIcon ii = new ImageIcon("C:\\Users\\MadCrayolaz\\Pictures\\icon-portrait.png");
         setIconImage(ii.getImage());
         JTabbedPane tabs = new JTabbedPane();
         for(int i = 0; i < guildList.size(); i++) {
