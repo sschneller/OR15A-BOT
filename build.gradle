@@ -4,10 +4,10 @@ plugins {
     id'com.github.johnrengelman.shadow' version '1.2.4'
 }
 
-mainClassName = 'com.crayonbox.orisa.OrisaListener'
+mainClassName = 'com.crayonbox.orisa.Bot'
 
 version '1.0'
-def jdaVersion = '3.3.0_273'
+def jdaVersion = '3.3.1_304'
 
 sourceCompatibility = 1.8
 
@@ -16,7 +16,19 @@ repositories {
 }
 
 dependencies {
+    compile 'com.jagrosh:JDA-Utilities:1.8'
     compile "net.dv8tion:JDA:$jdaVersion"
+    compile 'org.slf4j:slf4j-nop:1.7.25'
+    compile 'com.miglayout:miglayout:3.7.4'
+}
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
+    classifier = 'all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }
 
 compileJava.options.encoding = 'UTF-8'
